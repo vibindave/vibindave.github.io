@@ -28,13 +28,9 @@ jobs:
           npm run build --prefix VeritasThorne
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          # Your GitHub Pages branch
-          BRANCH: main
-          # The path to your built files (the folder to be deployed)
-          FOLDER: VeritasThorne/public
-          # The subfolder within the branch where files will be placed
-          TARGET_FOLDER: VeritasThorne
-          # The token to authorize the deployment
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./VeritasThorne/public
+          destination_dir: VeritasThorne
+          publish_branch: gh-pages
