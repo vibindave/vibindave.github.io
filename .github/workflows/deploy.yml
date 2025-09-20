@@ -3,10 +3,10 @@ name: Deploy Gatsby Blog to GitHub Pages
 on:
   push:
     branches:
-      - main # This workflow runs whenever you push to the 'main' branch
+      - main
 
 permissions:
-  contents: write # This is the crucial line
+  contents: write
   pages: write
   id-token: write
 
@@ -24,17 +24,17 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          # The --prefix flag ensures npm runs inside the VeritasThorne folder
           npm install --prefix VeritasThorne
           npm run build --prefix VeritasThorne
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Path to the built files
-          publish_dir: ./VeritasThorne/public
-          # The subdirectory where the files will be placed on GitHub Pages
-          destination_dir: VeritasThorne
-          # The branch to which the built files will be deployed
-          publish_branch: main
+          # Your GitHub Pages branch
+          BRANCH: main
+          # The path to your built files (the folder to be deployed)
+          FOLDER: VeritasThorne/public
+          # The subfolder within the branch where files will be placed
+          TARGET_FOLDER: VeritasThorne
+          # The token to authorize the deployment
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
