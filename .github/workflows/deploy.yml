@@ -37,4 +37,4 @@ jobs:
           # The subdirectory where the files will be placed on GitHub Pages
           destination_dir: VeritasThorne
           # The branch to which the built files will be deployed
-          publish_branch: gh-pages
+          publish_branch: main
