@@ -1,0 +1,35 @@
+name: Deploy Gatsby Blog to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # This workflow runs whenever you push to the 'main' branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies and build
+        run: |
+          # The --prefix flag ensures npm runs inside the VeritasThorne folder
+          npm install --prefix VeritasThorne
+          npm run build --prefix VeritasThorne
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Path to the built files
+          publish_dir: ./VeritasThorne/public
+          # The subdirectory where the files will be placed on GitHub Pages
+          destination_dir: VeritasThorne
+          # The branch to which the built files will be deployed
+          publish_branch: gh-pages
