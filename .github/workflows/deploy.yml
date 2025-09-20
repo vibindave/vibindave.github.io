@@ -5,6 +5,11 @@ on:
     branches:
       - main # This workflow runs whenever you push to the 'main' branch
 
+permissions:
+  contents: write # This is the crucial line
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
