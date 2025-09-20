@@ -1,0 +1,350 @@
+.icon {
+  position: absolute;
+  width: 91px;
+  height: 85px;
+  left: 37px;
+  top: 57px;
+}
+
+.heading {
+  position: absolute;
+  width: 157px;
+  height: 44px;
+  left: 25px;
+  top: 179px;
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 44px;
+  color: #EF5AA3;
+}
+
+.para {
+  position: absolute;
+  width: 126px;
+  height: 19px;
+  left: 29px;
+  top: 228px;
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(58, 58, 58, 0.6);
+}
+
+#Email-Address {
+  position: absolute;
+  width: 315px;
+  height: 58px;
+  left: 25px;
+  top: 290px;
+}
+
+.Email-Address {
+  position: absolute;
+  width: 315px;
+  height: 48px;
+  left: 0px;
+  top: 15px;
+}
+
+.far.fa-star.icon {
+  position: absolute;
+  width: 18px;
+  height: 13px;
+  left: 281px;
+  top: 28px;
+}
+
+.fas.fa-check.tick {
+  position: absolute;
+  width: 18px;
+  height: 13px;
+  left: 281px;
+  top: 28px;
+  color: #EF5AA3;
+  font-weight: 600;
+}
+
+#tick {
+  position: absolute;
+  width: 18px;
+  height: 13px;
+  left: 281px;
+  top: 28px;
+}
+
+.Emai {
+}
+
+.Email {
+  position: absolute;
+  width: 94px;
+  height: 17px;
+  left: 0px;
+  top: 0px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /*color: #B9B9B9;*/
+}
+
+#Password {
+  position: absolute;
+  width: 64px;
+  height: 17px;
+  left: 0px;
+  top: 1010px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /*color: #B9B9B9;*/
+}
+
+.password {
+  position: absolute;
+  width: 64px;
+  height: 17px;
+  left: 0px;
+  top: 100px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.password-input {
+  position: absolute;
+  width: 315px;
+  height: 48px;
+  left: 0px;
+  top: 115px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+#eye {
+  position: absolute;
+  width: 18px;
+  height: 12px;
+  left: 281px;
+  top: 130px;
+}
+
+.dots {
+  position: absolute;
+  width: 139px;
+  height: 17px;
+  left: 10px;
+  top: 130px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(58, 58, 58, 0.7);
+}
+
+.forgot {
+  position: absolute;
+  width: 135px;
+  height: 19px;
+  left: 25px;
+  top: 474px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #EF6BAA;
+}
+
+.sign-in {
+  position: absolute;
+  width: 315px;
+  height: 55px;
+  left: 27px;
+  top: 508px;
+  background: linear-gradient(98.88deg, #EF58A2 -14.33%, #EF88B8 92.04%);
+  box-shadow: 0px 8px 16px rgba(27, 57, 255, 0.2);
+  border-radius: 28px;
+}
+
+.text {
+  position: absolute;
+  width: 115px;
+  height: 17px;
+  left: 10px;
+  top: 33px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3A3A3A;
+}
+
+.line {
+  position: absolute;
+  width: 140px;
+  height: 0px;
+  left: 25px;
+  top: 618px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  transform: rotate(-0.73deg);
+}
+
+.or {
+  position: absolute;
+  width: 19px;
+  height: 22px;
+  left: 178px;
+  top: 605px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  /*text-align: center;*/
+  color: rgba(0, 0, 0, 0.6)4;
+}
+
+.line-1 {
+  position: absolute;
+  width: 140px;
+  height: 0px;
+  left: 204px;
+  top: 616px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.google {
+  position: absolute;
+  width: 140px;
+  height: 0px;
+  left: 130px;
+  top: 716px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.fas.fa-arrow-right.vector {
+  left: 150px;
+}
+
+.google {
+  box-sizing: border-box;
+  position: absolute;
+  width: 315px;
+  height: 55px;
+  left: 39px;
+  top: 669px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.56);
+  border-radius: 28px;
+}
+
+.group {
+  position: absolute;
+  width: 46.6px;
+  height: 35.12px;
+  left: 64px;
+  top: 678px;
+}
+
+.box {
+  position: absolute;
+  width: 36.41px;
+  height: 14.22px;
+  left: 36.48px;
+  top: 8px;
+}
+
+.box-1 {
+  position: absolute;
+  width: 10.26px;
+  height: 15.77px;
+  left: 35.07px;
+  top: 17.67px;
+}
+
+.box-2 {
+  position: absolute;
+  width: 36.24px;
+  height: 14.22px;
+  left: 35.55px;
+  top: 27.89px;
+}
+
+.box-3 {
+  position: absolute;
+  width: 22.37px;
+  height: 16.5px;
+  left: 55.37px;
+  top: 21.36px;
+}
+
+.continue {
+  position: absolute;
+  width: 196.46px;
+  height: 19.72px;
+  left: 133px;
+  top: 685px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.google:hover {
+  color: #212529;
+}
+
+.footer {
+  position: absolute;
+  width: 203px;
+  height: 15px;
+  left: 86px;
+  top: 763px;
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.last {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 61.76px;
+  bottom: 23.53px;
+}
+
+.signup {
+  position: absolute;
+  /*width: 211px;*/
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+}
+
+.google {
+}
+
