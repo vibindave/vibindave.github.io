@@ -40,6 +40,7 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
+          # The workflow needs to check inside the VeritasThorne folder
           if [ -f "${{ github.workspace }}/VeritasThorne/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
@@ -52,6 +53,7 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -67,9 +69,10 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v4
         with:
+          # Cache paths must also be inside the blog folder
           path: |
-            public
-            .cache
+            VeritasThorne/public
+            VeritasThorne/.cache
           key: ${{ runner.os }}-gatsby-build-${{ hashFiles('VeritasThorne/public') }}
           restore-keys: |
             ${{ runner.os }}-gatsby-build-
@@ -85,6 +88,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # The path to the public folder must be explicit
           path: ./VeritasThorne/public
 
   # Deployment job
