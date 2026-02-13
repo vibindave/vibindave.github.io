@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>🧩 Jumbled Words Challenge</title>
+
+<style>
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .game {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 35px;
+    width: 90%;
+    max-width: 720px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 32px;
+  }
+
+  .subtitle {
+    opacity: 0.8;
+    margin-bottom: 20px;
+  }
+
+  select {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .jumble {
+    font-size: 42px;
+    letter-spacing: 6px;
+    font-weight: bold;
+    margin: 30px 0;
+    animation: pop 0.4s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .buttons button {
+    padding: 12px 20px;
+    margin: 8px;
+    border-radius: 14px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #ffeb3b;
+    color: #000;
+  }
+
+  .buttons button:hover {
+    background: #fff176;
+  }
+
+  .answer {
+    margin-top: 20px;
+    font-size: 26px;
+    color: #00e676;
+    min-height: 40px;
+  }
+
+  .footer {
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="game">
+  <h1>🧩 Jumbled Words</h1>
+  <div class="subtitle">Movies & Famous Personalities</div>
+
+  <select id="mode" onchange="resetGame()">
+    <option value="movies">🎬 Movie Names</option>
+    <option value="people">🌟 Famous People</option>
+  </select>
+
+  <div class="jumble" id="jumble">CLICK START</div>
+
+  <div class="buttons">
+    <button onclick="nextWord()">▶ Start / Next</button>
+    <button onclick="reveal()">👀 Reveal</button>
+  </div>
+
+  <div class="answer" id="answer"></div>
+
+  <div class="footer">
+    No repeats • Same session • Guess in chat 😉
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
