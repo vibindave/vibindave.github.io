@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fun Friday Movie Wheel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1f2933, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .container {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 720px;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    opacity: 0.8;
+    margin-bottom: 18px;
+  }
+
+  .wheel-area {
+    position: relative;
+    margin: 20px auto;
+    width: 480px;
+    height: 480px;
+  }
+
+  canvas {
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: inset 0 0 0 8px #111,
+                0 15px 40px rgba(0,0,0,0.6);
+  }
+
+  .pointer {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 24px solid #facc15;
+    z-index: 10;
+  }
+
+  .center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #111;
+    border: 4px solid #facc15;
+  }
+
+  button {
+    margin: 12px 6px 0;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+
+  button.secondary {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+  }
+
+  .card {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.12);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .task {
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    font-size: 15px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎡 Fun Friday Movie Wheel</h1>
+  <div class="subtitle">Spin • Guess • Reveal 🎬</div>
+
+  <div class="wheel-area">
+    <div class="pointer"></div>
+    <canvas id="wheel" width="480" height="480"></canvas>
+    <div class="center-dot"></div>
+  </div>
+
+  <button onclick="spin()">Spin</button>
+  <button class="secondary" onclick="revealMovie()">Reveal Movie 🎬</button>
+
+  <div id="narration" class="card"></div>
+  <div id="task" class="task"></div>
+</div>
+
+<script>
+/* ================= DATA (OBJECT-BASED) ================= */
+
+const movieData = [
+  { movie: "Titanic", narration: "A luxury trip ruined by poor iceberg risk assessment." },
+  { movie: "Jurassic Park", narration: "Theme park ignores basic safety testing." },
+  { movie: "Inception", narration: "Meetings happen inside other meetings." },
+  { movie: "The Matrix", narration: "Reality crashes due to outdated software." },
+  { movie: "Star Wars", narration: "Family issues escalate across galaxies." },
+  { movie: "Harry Potter", narration: "School with very unsafe extracurriculars." },
+  { movie: "The Lion King", narration: "Leadership transition guided by animals." },
+  { movie: "Frozen", narration: "Sibling disagreement causes climate crisis." },
+  { movie: "The Avengers", narration: "Team meeting causes property damage." },
+  { movie: "Spider-Man", narration: "Intern struggles with work-life balance." },
+  { movie: "Batman", narration: "Wealthy individual invests heavily in gadgets." },
+  { movie: "Superman", narration: "Employee hides exceptional skills." },
+  { movie: "Shrek", narration: "Misjudged outsider exceeds expectations." },
+  { movie: "Finding Nemo", narration: "Parent navigates global logistics problem." },
+  { movie: "Toy Story", narration: "Office equipment questions job security." },
+  { movie: "The Godfather", narration: "Family business with poor HR policies." },
+  { movie: "Rocky", narration: "Persistence beats experience." },
+  { movie: "Jaws", narration: "Local tourism affected by one customer." },
+  { movie: "Back to the Future", narration: "Innovation creates unexpected regressions." },
+  { movie: "Ghostbusters", narration: "Startup monetizes niche problem." },
+  { movie: "The Terminator", narration: "Client refuses to stop following up." },
+  { movie: "Moana", narration: "Employee completes mission with minimal guidance." },
+  { movie: "Black Panther", narration: "Leadership role decided through ritual." },
+  { movie: "Doctor Strange", narration: "Career change leads to new perspective." },
+  { movie: "Guardians of the Galaxy", narration: "Unlikely team delivers results." },
+  { movie: "Deadpool", narration: "Employee ignores corporate communication norms." },
+  { movie: "The Dark Knight", narration: "Stakeholder enjoys chaos too much." },
+  { movie: "Avatar", narration: "New hire struggles with company culture." },
+  { movie: "Kung Fu Panda", narration: "Unexpected candidate becomes top performer." },
+  { movie: "Home Alone", narration: "Remote worker handles incident independently." }
+];
+
+const tasks = [
+  "React to the last 3 messages with emojis only",
+  "Share a work-safe meme or GIF",
+  "Rename yourself with a fun nickname for 3 minutes",
+  "Give a 20-second motivational speech about coffee",
+  "Speak in rhyme for your next sentence",
+  "Change your Teams background for 2 minutes",
+  "Describe your role like a movie trailer",
+  "Use only emojis for your next reply",
+  "Narrate your next action like a sports commentator",
+  "Recommend a movie in one sentence"
+];
+
+/* ================= WHEEL LOGIC ================= */
+
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const radius = canvas.width / 2;
+const sliceAngle = (2 * Math.PI) / movieData.length;
+
+let angle = 0;
+let spinning = false;
+let currentIndex = null;
+
+function drawWheel() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  movieData.forEach((_, i) => {
+    const start = angle + i * sliceAngle;
+    const end = start + sliceAngle;
+
+    ctx.beginPath();
+    ctx.moveTo(radius, radius);
+    ctx.arc(radius, radius, radius - 6, start, end);
+    ctx.fillStyle = `hsl(${i * 12}, 75%, 65%)`;
+    ctx.fill();
+
+    ctx.save();
+    ctx.translate(radius, radius);
+    ctx.rotate(start + sliceAngle / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#111";
+    ctx.font = "13px Poppins";
+    ctx.fillText(`Option ${i + 1}`, radius - 20, 4);
+    ctx.restore();
+  });
+}
+
+function spin() {
+  if (spinning) return;
+  spinning = true;
+
+  document.getElementById("narration").innerText = "";
+  document.getElementById("task").innerText = "";
+
+  let speed = Math.random() * 0.35 + 0.35;
+
+  const loop = setInterval(() => {
+    angle += speed;
+    speed *= 0.975;
+
+    if (speed < 0.002) {
+      clearInterval(loop);
+      spinning = false;
+      calculateResult();
+    }
+    drawWheel();
+  }, 16);
+}
+
+function calculateResult() {
+  const normalized = (2 * Math.PI - (angle % (2 * Math.PI)));
+  currentIndex = Math.floor(normalized / sliceAngle) % movieData.length;
+
+  document.getElementById("narration").innerText =
+    movieData[currentIndex].narration;
+
+  document.getElementById("task").innerText =
+    "🎯 Task: " + tasks[Math.floor(Math.random() * tasks.length)];
+}
+
+function revealMovie() {
+  if (currentIndex === null) return;
+  document.getElementById("narration").innerText =
+    "🎬 Movie: " + movieData[currentIndex].movie;
+}
+
+/* INIT */
+drawWheel();
+</script>
+
+</body>
+</html>
