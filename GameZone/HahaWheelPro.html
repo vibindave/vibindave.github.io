@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🎬 Haha Wheel Pro - Movie Guessing Game</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4ecdc4 75%, #667eea 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 30px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  .stat-box {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffe66d;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 5px;
+  }
+
+  .game-section {
+    margin-bottom: 50px;
+  }
+
+  .game-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #ffe66d);
+    margin: 15px auto 25px;
+  }
+
+  /* ============= WHEEL STYLES ============= */
+  .wheel-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .wheel-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    perspective: 1000px;
+  }
+
+  .pointer {
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 30px solid #ffeb3b;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  }
+
+  .wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+      #ff6b6b 0deg 30deg,
+      #ff8e72 30deg 60deg,
+      #4ecdc4 60deg 90deg,
+      #44b3aa 90deg 120deg,
+      #ffe66d 120deg 150deg,
+      #ffd93d 150deg 180deg,
+      #9c27b0 180deg 210deg,
+      #ba68c8 210deg 240deg,
+      #667eea 240deg 270deg,
+      #7c4dff 270deg 300deg,
+      #ff1744 300deg 330deg,
+      #d32f2f 330deg 360deg
+    );
+    border: 10px solid white;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 0, 0, 0.15), 
+                0 0 0 5px rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 28px;
+    transition: transform 4s cubic-bezier(0.17, 0.67, 0.14, 0.99);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .wheel:hover:not(.spinning) {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+  }
+
+  .wheel.spinning {
+    cursor: not-allowed;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 13px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e72 100%);
+    color: white;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  }
+
+  .btn-secondary {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44b3aa 100%);
+    color: white;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+  }
+
+  .btn-tertiary {
+    background: linear-gradient(135deg, #ffe66d 0%, #ffd93d 100%);
+    color: #2d3436;
+  }
+
+  .btn-tertiary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 230, 109, 0.4);
+  }
+
+  .game-content {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 30px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+  }
+
+  .hint-display {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 100px;
+    margin-bottom: 20px;
+  }
+
+  .reveal {
+    font-size: 2.2rem;
+    color: #00e676;
+    font-weight: bold;
+    min-height: 50px;
+    animation: popIn 0.4s ease;
+    margin: 20px 0;
+  }
+
+  @keyframes popIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .twister-display {
+    font-size: 1.3rem;
+    line-height: 2;
+    color: #ffe66d;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    word-wrap: break-word;
+    min-height: 100px;
+    font-weight: 500;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .container {
+      padding: 25px;
+    }
+
+    .wheel-container {
+      width: 280px;
+      height: 280px;
+    }
+
+    .pointer {
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 24px solid #ffeb3b;
+      top: -20px;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
+    .reveal {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🎬 Haha Wheel Pro</h1>
+<p class="subtitle">Spin the Wheel • Guess Movies • Master Tongue Twisters 🎭</p>
+
+<div class="container">
+  <!-- Stats Section -->
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-number" id="movieCount">0</div>
+      <div class="stat-label">Movies Guessed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="twisters">0</div>
+      <div class="stat-label">Twisters Tried</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="streak">0</div>
+      <div class="stat-label">Current Streak</div>
+    </div>
+  </div>
+
+  <!-- Movie Wheel Game -->
+  <div class="game-section">
+    <h2>🎬 Spin The Movie Wheel!</h2>
+    <div class="divider"></div>
+
+    <div class="wheel-wrapper">
+      <div class="wheel-container">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel">SPIN</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" onclick="spinWheel()" id="spinBtn">🎡 SPIN WHEEL</button>
+      <button class="btn-secondary" onclick="revealMovie()" id="revealBtn">👀 Reveal Movie</button>
+      <button class="btn-tertiary" onclick="skipMovie()">⏭️ Skip</button>
+    </div>
+
+    <div class="game-content">
+      <div class="hint-display" id="hints">🎉 Click SPIN WHEEL to start your movie challenge!</div>
+      <div class="reveal" id="movieReveal"></div>
+    </div>
+  </div>
+
+  <!-- Tongue Twister Game -->
+  <div class="game-section">
+    <h2>👅 Tongue Twister Challenge</h2>
+    <div class="divider"></div>
+
+    <div class="controls">
+      <button class="btn-primary" onclick="nextTwister()">🎯 Get Challenge</button>
+      <button class="btn-secondary" onclick="sayTwister()">🔊 Hear It</button>
+      <button class="btn-tertiary" onclick="skipTwister()">⏭️ Next</button>
+    </div>
+
+    <div class="game-content">
+      <div class="twister-display" id="twisterText">Click "Get Challenge" to try a tongue twister!</div>
+      <p style="font-size: 0.95rem; opacity: 0.7; margin-top: 15px;">Try saying it 5 times fast! 😄</p>
+    </div>
+  </div>
+</div>
+
+<a href="index.html" class="back-btn">← Back to Fun Friday</a>
+
+<script>
+  // ============= EMBEDDED DATA =============
+  const moviesData = [
+    {"name":"The Hangover","hints":["What happens in Vegas stays in Vegas... except the consequences.","Four idiots lose a friend in a wedding party gone wrong.","Bachelor party: Where bad decisions become legendary stories."]},
+    {"name":"Superbad","hints":["Two nerds try to buy alcohol and accidentally solve crimes.","High school friendship tested by fake ID and unexpected situations.","Seth and Evan's epic journey to be cool ends spectacularly wrong."]},
+    {"name":"Step Brothers","hints":["Two middle-aged rivals become step-brothers and regress to childhood.","Will Ferrell and John C. Reilly: Proof that maturity is optional.","Bunk bed drama that escalates into family chaos."]},
+    {"name":"Dumb and Dumber","hints":["Two idiots drive across America to return a briefcase to the wrong person.","IQ combined: 40. Common sense: 0. Entertainment value: Priceless.","Jim Carrey's hair and stupid decisions create comedy gold."]},
+    {"name":"The Mask","hints":["Shy guy finds magical mask and becomes party incarnate.","Jim Carrey's rubber face reaches its final form.","Green faced maniac teaches you to smile and be yourself... loudly."]},
+    {"name":"Groundhog Day","hints":["Cynical weatherman relives the same day until he fixes his attitude.","Infinite chances to get things right: Still takes forever.","Bill Murray discovers the meaning of life through repetition."]},
+    {"name":"Mean Girls","hints":["High school has a jungle and Regina George is the apex predator.","Calculus and cruel rumors: The ultimate recipe for chaos.","Wearing pink on Wednesdays is a legitimate life choice."]},
+    {"name":"Bridesmaids","hints":["A bride's best friend sabotages everything with love and incompetence.","The airplane scene will change your life forever.","Food poisoning at a bridal shop: Peak comedy."]},
+    {"name":"Tropic Thunder","hints":["Actors pretend to be soldiers and one thinks he's still acting.","Robert Downey Jr. in blackface wins an Oscar nod (fictional).","Ben Stiller's desperation and machine guns: A recipe for hilarity."]},
+    {"name":"Old School","hints":["A divorced guy throws legendary parties and destroys his life.","Will Ferrell's streaking sets the tone for pure chaos.","Going back to college at 40 and dating coeds: Bad idea, great movie."]},
+    {"name":"Anchorman","hints":["A news anchor battles sexism with hair gel and stupidity.","Will Ferrell's chest hair and seventies suit are iconic.","Whoa mama and jazz flute duets: Peak comedy writing."]},
+    {"name":"Talladega Nights","hints":["A NASCAR driver's life revolves around going really fast.","Ricky Bobby wants to be the best driver and eat nothing but candy.","Will Ferrell in a racing suit talking about cat food: Perfection."]},
+    {"name":"The 40-Year-Old Virgin","hints":["A virgin is awkwardly helped by his friends and falls in love.","Waxing scene makes grown men cry from sympathetic pain.","Sometimes you need friends to stage an intervention about your virginity."]},
+    {"name":"Knocked Up","hints":["One-night stand leads to unexpected pregnancy and bromance.","Seth Rogen bumbles through fatherhood before it even starts.","Responsibility hits different when there's a baby on the way."]},
+    {"name":"I Love You, Man","hints":["A guy needs a best man and accidentally finds a bromance.","Paul Rudd and Jason Segel love each other in a weird way.","Wedding planning never looked so gay (in the old-fashioned sense)."]},
+    {"name":"Role Models","hints":["Bad influences become mentors to at-risk kids.","Kid in a KISS costume is either the best or worst thing ever.","Seann William Scott's turban is genuinely mysterious."]},
+    {"name":"Dodgeball","hints":["Nobody makes a mockery of dodgeball... except these guys.","A gym gets saved by playing a stupid playground game.","If you can dodge a wrench, you can dodge a ball!"]},
+    {"name":"Wedding Crashers","hints":["Two guys crash weddings to meet women and find love.","Claire Colvert's family is insane and rich and kind of great.","Wedding season never ended, but romance definitely did."]},
+    {"name":"The Vacation Series","hints":["A dad's road trip vacations destroy his family's mental health.","Chevy Chase's determination to ruin everything is consistent.","Wally World is never reached but the journey is hilarious."]},
+    {"name":"Home Alone","hints":["A kid is left behind and turns his house into Fort Knox.","Burglar pain tolerance is tested by elaborate traps.","Macaulay Culkin's scream is the best part of Christmas."]},
+    {"name":"Mrs. Doubtfire","hints":["A disguised man cleans houses and confuses his ex-wife.","Robin Williams in a dress teaching lessons about custody laws.","Helloooooo is the most iconic greeting in cinema history."]},
+    {"name":"Elf","hints":["A giant raised by elves moves to New York and yells lots.","Christmas spirit cannot be killed even by cynical New Yorkers.","Buddy believes in Santa and we all believe in Buddy."]},
+    {"name":"A Christmas Story","hints":["A kid wants a gun for Christmas (rifle, not handgun).","The leg lamp is the greatest decoration in human history.","Licked by a dog in public: A true holiday tradition."]},
+    {"name":"Die Hard","hints":["A cop fights terrorists on Christmas in a skyscraper.","Yippee ki-yay becomes the catchphrase of action cinema.","One man vs many criminals: The premise of every action movie since."]},
+    {"name":"Rush Hour","hints":["A cop and a martial artist don't speak each other's language.","Jackie Chan and Chris Tucker form the best buddy duo.","Talkative cop meets quiet cop and both characters grow."]},
+    {"name":"Beverly Hills Cop","hints":["A Detroit cop drives to LA and doesn't fit in at all.","Eddie Murphy's mouth gets him in and out of trouble.","1980s excess and cocaine dealers: A different era of action."]},
+    {"name":"Coming to America","hints":["An African prince goes incognito in New York to find love.","Eddie Murphy plays two characters and both are charming.","Soul Glow and Sexual Chocolate are real business names in this world."]},
+    {"name":"Trading Places","hints":["A con artist and a commodities broker swap places and chaos ensues.","Eddie Murphy and Dan Aykroyd prove rich vs poor is relative.","A bet ruins both their lives but makes them better people."]},
+    {"name":"The Pink Panther","hints":["A bumbling detective solves crimes by accident and style.","Peter Sellers makes incompetence an art form.","A lisp makes everything funnier somehow."]},
+    {"name":"It's a Mad, Mad, Mad, Mad World","hints":["Everyone chases buried treasure and destroys California.","A compilation of every famous comedian in 1963.","An 18-wheeler hanging off a cliff is the most relatable part."]},
+    {"name":"Some Like It Hot","hints":["Two guys dress as women to escape the mob.","Marilyn Monroe's walk changed history.","An ending joke about gender and relationships ahead of its time."]},
+    {"name":"Singin' in the Rain","hints":["A guy sings and dances while it's raining and is totally chill.","Gene Kelly invents the best romantic gesture ever.","Lampposts are co-stars in this masterpiece."]},
+    {"name":"A Fish Called Wanda","hints":["Criminals and a woman play language games and love badly.","A man is afraid of fish and stutters in stressful situations.","British smugness collides with American chaos perfectly."]},
+    {"name":"Ghostbusters","hints":["Scientists fight ghosts in New York and it's hilarious.","Stay Puft Marshmallow Man is surprisingly tragic.","Who you gonna call becomes the most iconic jingle ever."]},
+    {"name":"Beetlejuice","hints":["Dead people hire a rogue ghost to haunt living people.","Michael Keaton as a bio-exorcist steals every scene.","Stripes and insanity are his signature look."]},
+    {"name":"Back to the Future","hints":["A teenager goes back in time and almost ruins his own existence.","A DeLorean is somehow the perfect time machine.","1.21 Gigawatts becomes every fan's favorite measurement."]},
+    {"name":"Ferris Bueller's Day Off","hints":["A teenager fakes sick and has the best day ever in Chicago.","A principal's obsession with catching him is weirdly relatable.","Parades and museums are the backdrop for teenage revolution."]},
+    {"name":"The Breakfast Club","hints":["Five stereotypical students bond during Saturday detention.","John Hughes proves that detention is where real growth happens.","A weird girl and a jock and a nerd all become friends."]},
+    {"name":"Sixteen Candles","hints":["A girl's sixteenth birthday is forgotten by her entire family.","A nerdy guy's crush becomes suddenly bearable.","Molly Ringwald somehow became a household name from this."]},
+    {"name":"Pretty in Pink","hints":["A poor girl and a rich guy defy social barriers.","Duckie's love is unrequited but earnest and endearing.","The prom dress controversy is more famous than the movie."]},
+    {"name":"Can't Buy Me Love","hints":["A nerd pays a popular girl to pretend to date him.","Everyone learns money can't buy popularity (just rent it short-term)."," '80s fashion choices are truly baffling in retrospect."]},
+    {"name":"Better Off Dead","hints":["A loser obsesses over his ex-girlfriend and nearly dies constantly.","A One-eyed Asian guy is the comic relief and coolest character.","Suicide jokes and a hamburger with a tiny face: '80s comedy."]},
+    {"name":"Say Anything","hints":["A loser guy and a genius girl fall in love.","A boombox playing In Your Eyes is peak romance.","John Cusack's coat is as iconic as his sincerity."]},
+    {"name":"Heathers","hints":["A dark comedy about teenagers murdering their popular classmates.","Winona Ryder's deadpan delivery is legendary.","Slap someone in the face and they wake up changed: Logic is optional."]},
+    {"name":"Clueless","hints":["A rich girl plays matchmaker and discovers herself.","Teen girl problems solved through shopping and good intentions.","As if! becomes every valley girl's favorite phrase."]},
+    {"name":"The Goonies","hints":["Kids go on an adventure and find pirates' treasure.","Sloth becomes a hero through unconditional love and food.","Truffle shuffle is a dance move that changed cinema."]},
+    {"name":"Fast Times at Ridgemont High","hints":["High school girls navigate boys, work, and life philosophically.","A pizza place job and a car are the only things that matter.","Sean Penn's stoner is the most chill philosophical mind."]},
+    {"name":"Weird Science","hints":["Two nerds create a woman from a computer.","A supermodel is the solution to their problems.","80's technology creating perfection is hilarious and sad."]},
+    {"name":"Revenge of the Nerds","hints":["Nerds take over college and prove they're superior somehow.","Tricycles and calculators don't usually lead to popularity.","Nerds + technology + revenge = surprisingly heartwarming."]},
+    {"name":"The Karate Kid","hints":["An old guy teaches a kid karate through wax-on-wax-off.","Catching flies with chopsticks is somehow a real technique.","Crane kick beats everything including fairness."]},
+    {"name":"Rocky","hints":["A bum becomes a boxer and fights the champion.","Running up stairs becomes the most iconic training montage.","Adrian! becomes the most passionate yell in sports cinema."]},
+    {"name":"Inception","hints":["Dreams within dreams and a spinning top haunt everyone.","Leonardo DiCaprio broods professionally for two hours.","An ending that nobody understands but everyone loves."]},
+    {"name":"The Matrix","hints":["Real life is actually a computer simulation (probably).","Red pill or blue pill changes everything you believe.","A man in sunglasses defies physics and gravity."]},
+    {"name":"Titanic","hints":["A ship sinks and a love story sinks with it.","Drawing women like your French girls: Weird flex.","Jack dies so Rose can live: The ultimate sacrifice."]},
+    {"name":"Jurassic Park","hints":["Life finds a way to escape and eat people.","Dinosaurs are cool until they're real and hungry.","A T-Rex destroys everything and becomes the star."]},
+    {"name":"Forrest Gump","hints":["A simple man accidentally influences American history.","Running across America is a personality trait apparently.","Feathers float and lives change; wisdom in motion."]},
+    {"name":"The Dark Knight","hints":["A Batman takes on a clown who's truly deranged.","Two-Face and the Joker are weirdly philosophical adversaries.","A pencil disappears into someone's face: Dark comedy at its best."]},
+    {"name":"Gladiator","hints":["An old general becomes a slave and fights for revenge.","Are you not entertained becomes a meme before memes existed.","Russell Crowe's voice and fury overcome Roman politics."]},
+    {"name":"Avatar","hints":["Aliens on an alien planet fight alien colonizers.","The movie is just Pocahontas but with better visuals.","Blue people and tall stature: Peak alien design."]},
+    {"name":"The Lion King","hints":["A prince's dad dies and he runs away like a quitter.","Musical lions somehow make death hilarious.","Hakuna Matata philosophy is life-changing for warthogs."]},
+    {"name":"Harry Potter","hints":["A wizard goes to school and fights his nemesis.","Voldemort's obsession with one kid is kind of tragic.","Friendship and magic save the day repeatedly."]},
+    {"name":"Frozen","hints":["A girl's emotional issues cause eternal winter.","Sisterly love is the solution to all problems.","Olaf the snowman just wants to experience summer."]},
+    {"name":"Sholay","hints":["Two thieves become heroes fighting a vengeful criminal.","The first Indian action film that changed cinema forever.","Amitabh and Dharmendra's bromance is unmatched."]},
+    {"name":"Bahubali","hints":["A warrior discovers his heritage and fights his mother's killer.","Massive sets and slow-motion action define this epic.","The backstory sequel answers nothing and asks more questions."]},
+    {"name":"3 Idiots","hints":["Three friends navigate engineering school and life philosophy.","Chasing excellence over marks is unexpectedly profound.","A prank goes horribly wrong and changes everything."]},
+    {"name":"KGF","hints":["A man whispers and entire mobs listen obediently.","Gold mining is the backdrop for pure action cinema.","Ravi Basrur's BGM carries this film on its back."]},
+    {"name":"Pushpa","hints":["A smuggler's confidence becomes his superpower.","Allu Arjun's swagger is the entire plot sometimes.","Pushpa, Pushpa! - The twist that shocked nobody."]},
+    {"name":"RRR","hints":["Two freedom fighters team up to destroy a common enemy.","The interval block is more intense than most movies.","This film proved South Indian cinema is unstoppable."]},
+    {"name":"Toy Story","hints":["Toys come alive when humans aren't looking.","A cowboy and a space ranger become best friends reluctantly.","To infinity and beyond becomes a way of life."]},
+    {"name":"Up","hints":["An old man ties balloons to his house and flies away.","A boy scout teaches an old widower about life.","The opening 10 minutes destroy your emotional stability."]},
+    {"name":"Finding Nemo","hints":["A dad searches for his missing son across the ocean.","He refuses to read maps and gets even more lost.","Blue tangs and sea turtles become your best friends."]},
+    {"name":"Pirates of the Caribbean","hints":["A drunk pirate saves the world by accident.","Jack Sparrow's walk and slur define his genius.","The kraken is pretty scary when not funny."]},
+    {"name":"Iron Man","hints":["A billionaire builds a suit and becomes a superhero.","Tony Stark's arrogance is somehow endearing.","AC/DC and technology: The recipe for awesome."]},
+    {"name":"Doctor Strange","hints":["A surgeon's hands get damaged so he learns magic.","The Multiverse of Madness needs better focus.","Capes are actually really important in this universe."]},
+    {"name":"Spider-Man","hints":["A teenager gets spider powers and great responsibility.","With great power comes great angst and poor life choices.","Web-shooting and sarcasm define his entire superhero career."]},
+    {"name":"Kung Fu Panda","hints":["A fat panda becomes the dragon warrior by accident.","Inner peace is harder than the splits.","Jack Black voices a panda better than most live actors."]},
+    {"name":"Parasite","hints":["A poor family infiltrates a rich family through deception.","Stairs and class division are the real villains.","A twist ending nobody saw coming but makes perfect sense."]},
+    {"name":"Oldboy","hints":["A man is imprisoned for 15 years for unknown reasons.","Sushi eating and hammer fighting are his specialties.","The twist will haunt you forever."]},
+    {"name":"Train to Busan","hints":["Zombies invade a high-speed train during an outbreak.","A father-daughter relationship is the real story.","Selfish people are worse than actual zombies."]},
+    {"name":"Life Is Beautiful","hints":["A father hides the Holocaust from his son with humor.","Love and imagination defeat real darkness somehow.","This film proves comedy and tragedy aren't opposites."]},
+    {"name":"Cinema Paradiso","hints":["A film projectionist changes a boy's life forever.","Memory and cinema blur as age steals innocence.","A reel of kisses from classic films is pure magic."]},
+    {"name":"The Intouchables","hints":["A wealthy man and his caregiver form an unlikely bond.","Money can't buy happiness but friendship can.","This film somehow makes disability hilarious and touching."]},
+    {"name":"Amélie","hints":["A shy waitress changes the world through small gesses.","Whimsy and magic exist in Paris if you look right.","Stop-motion meets live-action in a visual feast."]},
+    {"name":"Crouching Tiger, Hidden Dragon","hints":["Wire-fu martial arts defy physics and beauty.","A green sword is apparently the ultimate prize.","Forbidden love and honor collide in ancient China."]},
+    {"name":"Spirited Away","hints":["A girl enters a magical bathhouse and forgets herself.","No-Face eating people whole is weirdly fascinating.","Studio Ghibli creates worlds more real than reality."]},
+    {"name":"Your Name","hints":["Two teenagers swap bodies across time and space.","A comet threatens to destroy a town nobody remembers.","Japanese animation combined with existential crisis: Perfect."]},
+    {"name":"La La Land","hints":["A pianist and an actress fall in love in Los Angeles.","Traffic on the freeway becomes a musical number.","The ending is beautiful and heartbreaking simultaneously."]},
+    {"name":"The Notebook","hints":["An old man reads to an old woman he used to love.","Poverty and class keep them apart until memory fades.","Rainy scenes and passionate kissing define this romance."]},
+    {"name":"Pride and Prejudice","hints":["A girl and a guy hate each other then fall in love.","British society rules romance through propriety and shame.","Elizabeth Bennet might be the first feminist protagonist."]},
+    {"name":"The Exorcist","hints":["A girl is possessed by a demon that swears a lot.","A priest fights the devil inside an adolescent.","That spins-the-head scene changed horror forever."]},
+    {"name":"The Conjuring","hints":["Paranormal investigators fight a haunted farmhouse.","A doll named Annabelle is terrifyingly alive.","The Warrens are real people (probably) according to movies."]},
+    {"name":"Get Out","hints":["A Black man visits his white girlfriend's family.","Photosynthesis and brain transplants are involved somehow.","Social commentary wrapped in a horror package."]},
+    {"name":"A Quiet Place","hints":["Creatures hunt by sound so everyone is silent.","A family survives without speaking for over a year.","Emily Blunt's intensity carries this silent masterpiece."]},
+    {"name":"It","hints":["A shape-shifting demon targets children in a small town.","Pennywise the clown is terrifyingly effective.","Childhood friendship is the only weapon that works."]},
+    {"name":"The Ring","hints":["A videotape kills you in seven days if you watch it.","A girl crawls out of a TV and it's somehow scarier.","Wet hair and pale skin define horror fashion now."]},
+    {"name":"Casino","hints":["Organized crime runs Las Vegas and destroys everything.","De Niro and Pesci's friendship is codependent and toxic.","The violence is gratuitous but somehow justified."]},
+    {"name":"Goodfellas","hints":["Mobsters think they're businessmen but with more murder.","The Copacabana tracking shot is legendary.","Ice picks and loyalty define Italian-American culture here."]},
+    {"name":"The Departed","hints":["An undercover cop and a mobster infiltrate each other's world.","Boston accents and betrayal define this crime drama.","The ending subverts expectations in the best way."]},
+    {"name":"Heat","hints":["A cop and a robber respect each other across the law.","A bank heist is the most important part of this film.","Michael Mann's direction makes crime look like art."]},
+    {"name":"Scarface","hints":["A cocaine dealer rises and falls in 1980s Miami.","A chainsaw and a mansion define excess perfectly.","Al Pacino yelling is the most quotable thing ever."]},
+    {"name":"Once Upon a Time in Hollywood","hints":["A fading actor and his stunt double navigate 1960s Hollywood.","Tarantino rewrites history with Sharon Tate alive.","Brad Pitt and Leo DiCaprio's chemistry is unmatched."]},
+    {"name":"The Wolf of Wall Street","hints":["A stockbroker commits fraud on a massive scale.","Cocaine and excess are the real main characters.","Leonardo DiCaprio's rants are golden quotable moments."]},
+    {"name":"Catch Me If You Can","hints":["A con artist and an FBI agent play a game of chess.","Forging checks and impersonating people become an art.","The catch is less interesting than the chase."]},
+    {"name":"The Social Network","hints":["A college kid's jealousy creates Facebook.","Coding and lawsuits replace meaningful friendships.","The Zuckerberg origin story nobody asked for."]},
+    {"name":"Moneyball","hints":["A poor team uses statistics to beat rich teams.","Brad Pitt makes math seem like a valid strategy.","The underdog wins through spreadsheets instead of luck."]},
+    {"name":"The Big Short","hints":["Wall Street bankers predict a financial collapse.","Explainments using celebrities make complex finance funny.","Greed and stupidity destroy the global economy."]},
+    {"name":"No Country for Old Men","hints":["A hunter finds drug money and triggers a death spiral.","Javier Bardem's silence is more menacing than words.","Coen Brothers make morality ambiguous and fascinating."]},
+    {"name":"There Will Be Blood","hints":["An oil magnate's ambition destroys everyone around him.","Plainview's love is only for money and competition.","Paul Thomas Anderson's longest films feel shortest."]},
+    {"name":"Blade Runner","hints":["A cop hunts artificial humans who seem more human.","Is he a replicant? Yes. Spoiler alert.","Noir and sci-fi collide in a dystopian masterpiece."]},
+    {"name":"Blade Runner 2049","hints":["A new blade runner finds an impossible secret.","Cyan and orange color grading is literally everything.","Gosling's silence speaks louder than dialogue ever could."]},
+    {"name":"The Prestige","hints":["Two magicians compete with deadly consequences.","A Tesla machine duplicates things or does it?","Christopher Nolan's direction is as magical as the plot."]},
+    {"name":"Memento","hints":["A man with no short-term memory seeks revenge.","Black and white scenes told in reverse confuse us intentionally.","You won't remember what happened but you'll feel it."]},
+    {"name":"Tenet","hints":["Time is inverted and bullets travel backwards.","The plot is incomprehensible but the action is great.","Christopher Nolan has perfected confusing audiences."]},
+    {"name":"The Truman Show","hints":["A guy's entire life is a TV show he doesn't know about.","The world inside a dome is more fake than real.","Free will vs control is the question nobody asked."]},
+    {"name":"Cast Away","hints":["A man survives on an island with only a volleyball.","Wilson the volleyball becomes his best friend.","Tooth pulling and fire-making are the real challenges."]},
+    {"name":"Apocalypse Now","hints":["A soldier travels upriver to kill a rogue colonel.","I love the smell of napalm in the morning is perfection.","War is hell and Francis Ford Coppola proves it artfully."]},
+    {"name":"Full Metal Jacket","hints":["A DI verbally destroys soldiers then sends them to Vietnam.","I am become death, the destroyer of worlds via rifle training.","The first half about training is better than the war half."]},
+    {"name":"A Clockwork Orange","hints":["A violent youth is cured through controversial methods.","Beethoven and ultraviolence make a weird combination.","Stanley Kubrick's disturbing vision of the future is prophetic."]},
+    {"name":"The Shining","hints":["A writer goes insane in a haunted hotel during winter.","The maze isn't in the movie but everyone remembers it.","Here's Johnny and an axe through a door."]},
+    {"name":"Doctor Sleep","hints":["An adult Danny Torrance fights a cult of psychic vampires.","Covering up the past is harder than running from ghosts.","The hotel returns and it's somehow scarier than before."]},
+    {"name":"Fargo","hints":["A man's kidnapping scheme unravels in Minnesota.","A pregnant cop investigates small-town criminals.","Woodchippers and accents make Coen Brothers magic."]},
+    {"name":"The Silence of the Lambs","hints":["An FBI trainee gets help from a cannibalistic psychologist.","Hannibal Lecter is charming despite eating people.","Quid pro quo becomes the most memorable interrogation ever."]},
+    {"name":"Black Swan","hints":["A ballerina's obsession for perfection destroys her mind.","Is she real or imagined? Yes.","Natalie Portman's transformation is as stunning as it is disturbing."]},
+    {"name":"Joker","hints":["A man's descent into madness creates a villain.","Comedy and tragedy flip sides when nobody laughs.","Joaquin Phoenix's performance is uncomfortably brilliant."]},
+    {"name":"The Batman","hints":["A young Batman fights crime as a vigilante detective.","Gotham is corrupt and dark and Robert Pattinson is moody.","The Riddler is a terrorist with a message."]},
+    {"name":"Man of Steel","hints":["Superman arrives and destroys Metropolis to save it.","Aliens fight humans and buildings are collateral damage.","A god learns to be human through destruction."]},
+    {"name":"Wonder Woman","hints":["An Amazonian princess learns the real world is complex.","World War I is the backdrop for her origin.","Gal Gadot's confidence matches her superhero strength."]},
+    {"name":"Aquaman","hints":["An underwater kingdom needs a king to fight his half-brother.","The ocean is massive and colorful and full of action.","Jason Momoa's abs are a supporting character."]},
+    {"name":"Shazam","hints":["A kid says a word and becomes a powerful adult superhero.","Comedy and genuine heart make this superhero film unique.","Flying and super strength are fun when nobody's cynical."]},
+    {"name":"Harry Potter and the Sorcerer's Stone","hints":["A wizard discovers his magic and his nemesis is a wraith.","A school for witchcraft is like Hogwarts but with magic.","Harry Potter's scar means he's connected to evil itself."]},
+    {"name":"The Lord of the Rings - Fellowship","hints":["A hobbit must destroy a ring by walking to a mountain.","He's not alone but they argue the entire way.","Hobbits are small and determined and the best heroes."]},
+    {"name":"The Lord of the Rings - The Return of the King","hints":["An epic finale where the ring is destroyed finally.","Legolas and Gimli's friendship is the real story.","The ending goes on forever but you don't mind."]},
+    {"name":"The Hobbit","hints":["A small guy's adventure is actually a prequel's prequel.","He finds a magic ring that's definitely important.","Three movies about dwarves is maybe two movies too many."]}
+  ];
+
+  const twistersData = [
+    "The sixth sick sheikh's sixth sheep's sick.",
+    "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+    "Irish wristwatch.",
+    "Red lorry, yellow lorry.",
+    "Rural.",
+    "She sells seashells by the seashore.",
+    "Worcestershire sauce.",
+    "Unique New York.",
+    "Squirrel.",
+    "Anemone.",
+    "Otorhinolaryngologist.",
+    "Brisk, bustling brewers.",
+    "Toy boat.",
+    "Rural ruler.",
+    "Sushi chef.",
+    "Greek grapes.",
+    "Isthmus.",
+    "The lips, the teeth, the tip of the tongue.",
+    "A noisy noise annoys an oyster.",
+    "Pad kid poured curd pulled cod.",
+    "Please put your frozen French fries in a proper pile.",
+    "Betty bought a bit of better butter to make her batter better.",
+    "Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair.",
+    "A proper cup of coffee from a proper copper coffee pot.",
+    "The thirty-three thieves thought that they thrilled the throne throughout Thursday.",
+    "Six silly sisters sitting side by side.",
+    "Slippery slope.",
+    "Strict strong-structured strokes.",
+    "I can't believe I'm on a zebra in my pajamas.",
+    "I slit the sheet, the sheet I slit, and on the slitted sheet I sit.",
+    "Black background, brown background.",
+    "Silly Sally sells seashells beside the sea shore.",
+    "You know New York, you need New York, you know you need unique New York.",
+    "Mixed biscuits, mixed biscuits.",
+    "Ed had edited it.",
+    "Stupid superstition.",
+    "Rural juror.",
+    "Worcestershire.",
+    "Liberal.",
+    "Colonel.",
+    "Laurel and Hardy.",
+    "Laurel.",
+    "Loll.",
+    "Lull.",
+    "Llama.",
+    "Parallel.",
+    "Really leery.",
+    "Rubber buggy bumpers.",
+    "Soldiers' shoulders.",
+    "Good blood, bad blood.",
+    "Selfish shellfish.",
+    "Specific Pacific.",
+    "Tip of the tongue takes teeth and lips.",
+    "Pure pork purveyor.",
+    "Rural route.",
+    "Red truck, yellow truck.",
+    "Truly rural.",
+    "Freshly fried flying fish.",
+    "Susie Shine's shiny shoes.",
+    "Lemon liniment.",
+    "Potential parallel planes.",
+    "Silly soldiers shell shocked senseless.",
+    "Preshrunk silk shirts.",
+    "Twelve twins twirled twelve twigs twice.",
+    "Lily's longest leotard lasted longer than Linda's.",
+    "Allegedly.",
+    "Palindromic.",
+    "Squirrelly.",
+    "Metronome.",
+    "Onomatopoeia.",
+    "Sesame.",
+    "Synecdoche.",
+    "Syzygy.",
+    "Floccinaucinilicilification.",
+    "Pneumonoultramicroscopicsilicovolcanoconiosis.",
+    "Antidisestablishmentarianism.",
+    "Lollipop.",
+    "Yummy yellow yogurt.",
+    "Yellow yo-yos.",
+    "Yellow yarn yielded yachtsmen.",
+    "Zany zebras zipped zippers on zoo zonks.",
+    "Zealous zookeeper's zealous zone.",
+    "Zigzag zestfully zipping zones.",
+    "Mommy made me mash my M and Ms.",
+    "Many mumbling mice made merry in the mousy moonlight.",
+    "Meandering Mike mildly mashing marvelous mints.",
+    "Monkeys make massive messes.",
+    "Naomi knew I would nab nine new nectarines.",
+    "Ninety-nine bottles of nasal nickels.",
+    "Noisily navigate nine noble northern nymphs.",
+    "Nasty gnats named Ned.",
+    "Nick's neck needs a new necklace."
+  ];
+
+  // ============= GAME STATE =============
+  let unusedMovies = [...moviesData];
+  let unusedTwisters = [...twistersData];
+  let currentMovie = null;
+  let currentTwister = null;
+  let movieCount = 0;
+  let twisterCount = 0;
+  let streak = 0;
+  let angle = 0;
+  let isSpinning = false;
+
+  // ============= MOVIE WHEEL LOGIC =============
+  function spinWheel() {
+    if (isSpinning) return;
+    
+    if (unusedMovies.length === 0) {
+      unusedMovies = [...moviesData];
+      streak = 0;
+    }
+
+    isSpinning = true;
+    document.getElementById('spinBtn').disabled = true;
+    document.getElementById('revealBtn').disabled = true;
+
+    // Random rotation
+    const randomSpin = Math.floor(Math.random() * 3600) + 3600;
+    angle += randomSpin;
+
+    const wheel = document.getElementById('wheel');
+    wheel.style.transform = `rotate(${angle}deg)`;
+    wheel.classList.add('spinning');
+
+    // Pick random movie
+    const index = Math.floor(Math.random() * unusedMovies.length);
+    currentMovie = unusedMovies.splice(index, 1)[0];
+
+    movieCount++;
+    updateStats();
+
+    // Wait for wheel animation to finish
+    setTimeout(() => {
+      displayMovieHints();
+      isSpinning = false;
+      document.getElementById('spinBtn').disabled = false;
+      document.getElementById('revealBtn').disabled = false;
+      wheel.classList.remove('spinning');
+    }, 4000);
+  }
+
+  function displayMovieHints() {
+    let hintsText = '🎤 CLUES:\n\n';
+    currentMovie.hints.forEach((hint, i) => {
+      hintsText += `${i + 1}. ${hint}\n\n`;
+    });
+    hintsText += '👀 Can you guess the movie?';
+    document.getElementById('hints').innerText = hintsText;
+    document.getElementById('movieReveal').innerText = '';
+  }
+
+  function revealMovie() {
+    if (!currentMovie) {
+      alert('Spin the wheel first!');
+      return;
+    }
+    document.getElementById('movieReveal').innerText = '🎬 ' + currentMovie.name;
+    streak++;
+    updateStats();
+  }
+
+  function skipMovie() {
+    if (unusedMovies.length === 0) {
+      unusedMovies = [...moviesData];
+      streak = 0;
+    }
+    spinWheel();
+  }
+
+  // ============= TONGUE TWISTER LOGIC =============
+  function nextTwister() {
+    if (unusedTwisters.length === 0) {
+      unusedTwisters = [...twistersData];
+    }
+
+    const index = Math.floor(Math.random() * unusedTwisters.length);
+    currentTwister = unusedTwisters.splice(index, 1)[0];
+    twisterCount++;
+    updateStats();
+
+    document.getElementById('twisterText').innerText = currentTwister;
+  }
+
+  function sayTwister() {
+    if (!currentTwister) {
+      alert('Get a challenge first!');
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(currentTwister);
+    utterance.rate = 0.7;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function skipTwister() {
+    nextTwister();
+  }
+
+  // ============= STATS =============
+  function updateStats() {
+    document.getElementById('movieCount').innerText = movieCount;
+    document.getElementById('twisters').innerText = twisterCount;
+    document.getElementById('streak').innerText = streak;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+{
+  "funnyMovies": [
+    {
+      "name": "The Hangover",
+      "hints": [
+        "What happens in Vegas stays in Vegas... except the consequences.",
+        "Four idiots lose a friend in a wedding party gone wrong.",
+        "Bachelor party: Where bad decisions become legendary stories."
+      ]
+    },
+    {
+      "name": "Superbad",
+      "hints": [
+        "Two nerds try to buy alcohol and accidentally solve crimes.",
+        "High school friendship tested by fake ID and unexpected situations.",
+        "Seth and Evan's epic journey to be cool ends spectacularly wrong."
+      ]
+    },
+    {
+      "name": "Step Brothers",
+      "hints": [
+        "Two middle-aged rivals become step-brothers and regress to childhood.",
+        "Will Ferrell and John C. Reilly: Proof that maturity is optional.",
+        "Bunk bed drama that escalates into family chaos."
+      ]
+    },
+    {
+      "name": "Dumb and Dumber",
+      "hints": [
+        "Two idiots drive across America to return a briefcase to the wrong person.",
+        "IQ combined: 40. Common sense: 0. Entertainment value: Priceless.",
+        "Jim Carrey's hair and stupid decisions create comedy gold."
+      ]
+    },
+    {
+      "name": "The Mask",
+      "hints": [
+        "Shy guy finds magical mask and becomes party incarnate.",
+        "Jim Carrey's rubber face reaches its final form.",
+        "Green faced maniac teaches you to smile and be yourself... loudly."
+      ]
+    },
+    {
+      "name": "Groundhog Day",
+      "hints": [
+        "Cynical weatherman relives the same day until he fixes his attitude.",
+        "Infinite chances to get things right: Still takes forever.",
+        "Bill Murray discovers the meaning of life through repetition."
+      ]
+    },
+    {
+      "name": "Mean Girls",
+      "hints": [
+        "Homeschooled girl enters high school jungle and becomes the villain.",
+        "Plastic surgery of the soul: Making everyone toxic.",
+        "The Burn Book: High school drama meets comedy gold."
+      ]
+    },
+    {
+      "name": "Bridesmaids",
+      "hints": [
+        "Best friend ruins everything while trying to help her bestie marry.",
+        "Food poisoning scene: Proof that laughter and disgust can coexist.",
+        "Melissa McCarthy steals every scene with improvised insanity."
+      ]
+    },
+    {
+      "name": "Tropic Thunder",
+      "hints": [
+        "Method actors so committed they forget they're acting.",
+        "Robert Downey Jr. wins awards for blackface and being ridiculous.",
+        "Ben Stiller's clueless director is cluelessness personified."
+      ]
+    },
+    {
+      "name": "Old School",
+      "hints": [
+        "Middle-aged man starts a fraternity and acts like he's 20 again.",
+        "Will Ferrell screaming about scrotums: Peak comedy.",
+        "Midlife crisis manifests as toga parties and beer pong."
+      ]
+    },
+    {
+      "name": "Anchorman",
+      "hints": [
+        "Vain news anchor loses everything and makes it everyone's problem.",
+        "Ron Burgundy: Living in a glass case of emotion.",
+        "Improvisational insults masquerading as a news broadcast."
+      ]
+    },
+    {
+      "name": "Talladega Nights",
+      "hints": [
+        "NASCAR driver teaches us that rednecks can be hilarious.",
+        "Will Ferrell yelling about baby Jesus: Comedy perfection.",
+        "Competitive racing, competitive prayers, competitive stupidity."
+      ]
+    },
+    {
+      "name": "The 40-Year-Old Virgin",
+      "hints": [
+        "Socially awkward guy still a virgin and everyone won't let him forget it.",
+        "Chest waxing scene: Excruciating pain equals comedy.",
+        "Friends interfere so badly they almost ruin everything."
+      ]
+    },
+    {
+      "name": "Knocked Up",
+      "hints": [
+        "One night stand results in forever commitment neither wanted.",
+        "Grown men act like teenagers when facing responsibility.",
+        "Pregnancy movie where nobody knows what they're doing."
+      ]
+    },
+    {
+      "name": "I Love You, Man",
+      "hints": [
+        "Guy needs best friend before getting married and finds bromance instead.",
+        "Love songs sung to other men: Not romantic, but hilarious.",
+        "Jason Segel's comedy timing: Underrated and perfect."
+      ]
+    },
+    {
+      "name": "Role Models",
+      "hints": [
+        "Two losers become mentors to kids and spread chaos.",
+        "Energy drink salesmen destroy everything they touch.",
+        "Seann William Scott's stupidity is actually endearing."
+      ]
+    },
+    {
+      "name": "Dodgeball: A True Underdog Story",
+      "hints": [
+        "Gym owner enters dodgeball tournament to save his dying gym.",
+        "Vince Vaughn vs. Ben Stiller in the most ridiculous sports movie.",
+        "Dodgeball: It's not just a game, it's a way of life."
+      ]
+    },
+    {
+      "name": "Wedding Crashers",
+      "hints": [
+        "Two con men crash weddings to pick up women and find actual love.",
+        "Vince Vaughn improvising dialogue: Pure gold.",
+        "Fake family relationships lead to real complications."
+      ]
+    },
+    {
+      "name": "The Vacation Series",
+      "hints": [
+        "Chevy Chase ruins family vacations with his incompetence.",
+        "Well-intentioned plans always end in disaster.",
+        "National Lampoon's guide to how NOT to vacation."
+      ]
+    },
+    {
+      "name": "Home Alone",
+      "hints": [
+        "Kid left behind successfully defends house against burglars.",
+        "Paint cans become weapons in most painful home defense ever.",
+        "Macaulay Culkin's screaming face: Iconic childhood trauma."
+      ]
+    },
+    {
+      "name": "Mrs. Doubtfire",
+      "hints": [
+        "Divorced dad dresses as elderly nanny to spend time with kids.",
+        "Robin Williams' prosthetics and accent create comedy chaos.",
+        "Custody battle solved through elaborate cross-dressing scheme."
+      ]
+    },
+    {
+      "name": "Elf",
+      "hints": [
+        "Human raised by elves returns to New York and drives everyone crazy.",
+        "Will Ferrell's childlike enthusiasm is hilariously contagious.",
+        "Syrup on everything: One man's joy is everyone else's disgust."
+      ]
+    },
+    {
+      "name": "A Christmas Story",
+      "hints": [
+        "Kid wants BB gun despite constant warnings about shooting his eye out.",
+        "Leg lamp: The most awkward Christmas decoration ever.",
+        "Tongue stuck to frozen pole: Winter's worst nightmare."
+      ]
+    },
+    {
+      "name": "Die Hard",
+      "hints": [
+        "Cop crashes Christmas party, kills terrorists, saves day.",
+        "Yippee-ki-yay: The catchphrase that launched a thousand action comedies.",
+        "Bruce Willis in a tank top > any superhero movie."
+      ]
+    },
+    {
+      "name": "Rush Hour",
+      "hints": [
+        "Hong Kong cop and LAPD detective: Cultural comedy collisions.",
+        "Jackie Chan's stunts combined with Chris Tucker's voice = chaos.",
+        "The buddy cop movie that started it all."
+      ]
+    },
+    {
+      "name": "Beverly Hillbillies Movie",
+      "hints": [
+        "Poor rural family strikes oil and moves to Beverly Hills.",
+        "Fish out of water: Backwoods edition.",
+        "Jed Clampett's logic beats sophisticated society every time."
+      ]
+    },
+    {
+      "name": "Coming to America",
+      "hints": [
+        "African prince comes to Queens to find princess without royal help.",
+        "Eddie Murphy's accent is hilariously fake throughout.",
+        "Random people become barbershop philosophers."
+      ]
+    },
+    {
+      "name": "Trading Places",
+      "hints": [
+        "Rich and poor men swap lives and chaos ensues.",
+        "Eddie Murphy and Dan Aykroyd in economic role reversal.",
+        "Wall Street greed meets street smarts comedy."
+      ]
+    },
+    {
+      "name": "Beverly Hills Cop",
+      "hints": [
+        "Detroit cop goes to Beverly Hills and annoys everyone stylishly.",
+        "Axel Foley's improvisation: Legendary.",
+        "Eddie Murphy's comedy saves every scene."
+      ]
+    },
+    {
+      "name": "The Pink Panther",
+      "hints": [
+        "Bumbling detective solves crimes by accident and stupidity.",
+        "Inspector Clouseau's accent is intentionally incomprehensible.",
+        "Physical comedy masterclass in how to fail upward."
+      ]
+    },
+    {
+      "name": "It's a Mad, Mad, Mad, Mad World",
+      "hints": [
+        "Everyone races to find buried treasure and destroys everything.",
+        "All-star cast competing for money in catastrophic chaos.",
+        "The original ensemble comedy disaster film."
+      ]
+    },
+    {
+      "name": "Some Like It Hot",
+      "hints": [
+        "Two guys dress as women to escape gangsters and find romance.",
+        "Marilyn Monroe steals every scene effortlessly.",
+        "One of cinema's greatest comedies with drag twist."
+      ]
+    },
+    {
+      "name": "Singin' in the Rain",
+      "hints": [
+        "Gene Kelly's dance in the rain: Pure joy.",
+        "Hollywood phoniness revealed through song and dance.",
+        "Classic musical with clever comedy throughout."
+      ]
+    },
+    {
+      "name": "A Fish Called Wanda",
+      "hints": [
+        "Heist gone wrong with romantic complications and Monty Python humor.",
+        "Jamie Lee Curtis: Surprisingly funny and oddly sexy.",
+        "Kevin Kline's neurotic criminal is comedy perfection."
+      ]
+    },
+    {
+      "name": "The Producers",
+      "hints": [
+        "Con men create worst Broadway show ever and it becomes a hit.",
+        "Nathan Lane and Matthew Broderick revive the role perfectly.",
+        "Musical theater satire at its finest."
+      ]
+    },
+    {
+      "name": "Singin' in the Rain",
+      "hints": [
+        "Gene Kelly's dance in the rain: Pure joy.",
+        "Hollywood phoniness revealed through song and dance.",
+        "Classic musical with clever comedy throughout."
+      ]
+    },
+    {
+      "name": "It Happened One Night",
+      "hints": [
+        "Reporter and heiress go on road trip and fall in love.",
+        "Screwball comedy that invented the romantic comedy formula.",
+        "Clark Gable's charm makes everything better."
+      ]
+    },
+    {
+      "name": "Breakfast at Tiffany's",
+      "hints": [
+        "Eccentric woman plays escorts while writing about her neighbors.",
+        "Audrey Hepburn's style transcends the comedy.",
+        "New York parties and failed relationships: A love story."
+      ]
+    },
+    {
+      "name": "Ghostbusters",
+      "hints": [
+        "Scientists fight ghosts in New York and somehow win.",
+        "Bill Murray's one-liners are legendary.",
+        "Stay Puft Marshmallow Man: Worst threat ever."
+      ]
+    },
+    {
+      "name": "Beetlejuice",
+      "hints": [
+        "Dead couple hire ghost to haunt their house and regret it.",
+        "Michael Keaton's manic energy steals the entire movie.",
+        "Death is just the beginning of problems."
+      ]
+    },
+    {
+      "name": "Back to the Future",
+      "hints": [
+        "Teen goes back to 1955 and nearly ruins his parents' relationship.",
+        "DeLorean: Most iconic car in cinema history.",
+        "Time travel creates hilarious family complications."
+      ]
+    },
+    {
+      "name": "Ferris Bueller's Day Off",
+      "hints": [
+        "High school kid skips school and has the perfect adventure.",
+        "Matthew Broderick's charm breaks the fourth wall constantly.",
+        "Ferrari destroyed: The perfect comedy moment."
+      ]
+    },
+    {
+      "name": "The Breakfast Club",
+      "hints": [
+        "Five stereotypical teens learn about each other in detention.",
+        "John Hughes' understanding of teen angst and comedy.",
+        "Simple Minds soundtrack elevates the teenage melodrama."
+      ]
+    },
+    {
+      "name": "Sixteen Candles",
+      "hints": [
+        "Girl's 16th birthday forgotten by her entire family.",
+        "John Hughes captures teenage life hilariously.",
+        "Molly Ringwald deserves better but finds it anyway."
+      ]
+    },
+    {
+      "name": "Pretty in Pink",
+      "hints": [
+        "Poor girl loves rich guy and creates dress from duct tape.",
+        "Molly Ringwald's fashion sense is so 80s it's funny.",
+        "Love conquers class warfare through prom attendance."
+      ]
+    },
+    {
+      "name": "Can't Buy Me Love",
+      "hints": [
+        "Poor kid buys friendship with rich girl using his college fund.",
+        "Patrick Dempsey as a nerd is hilariously awkward.",
+        "Capitalism solves social problems temporarily."
+      ]
+    },
+    {
+      "name": "Better Off Dead",
+      "hints": [
+        "Teen wants to die after girlfriend leaves him for jock.",
+        "John Cusack's deadpan humor: Darkly perfect.",
+        "Suicide attempts played for comedy: Very 80s."
+      ]
+    },
+    {
+      "name": "Say Anything",
+      "hints": [
+        "Guy's only ambition is to follow his girlfriend to California.",
+        "John Cusack with a boombox: Romance defined.",
+        "Ione Skye's indie charm makes everything work."
+      ]
+    },
+    {
+      "name": "Heathers",
+      "hints": [
+        "Teenagers kill each other and blame it on suicide pacts.",
+        "Winona Ryder's goth style predates goth fashion.",
+        "Dark comedy where nobody survives with dignity."
+      ]
+    },
+    {
+      "name": "Clueless",
+      "hints": [
+        "Valley girl plays matchmaker and finds love herself.",
+        "Alicia Silverstone's performance is unexpectedly brilliant.",
+        "1995 fashion flashback that somehow still influences style."
+      ]
+    },
+    {
+      "name": "Jawbone",
+      "hints": [
+        "Teenage boxer problems: Terrible dialogue, unintentional comedy.",
+        "Indie film so awkward it becomes entertainment.",
+        "Coming-of-age angst at maximum cringe."
+      ]
+    },
+    {
+      "name": "The Goonies",
+      "hints": [
+        "Kids search for pirate treasure to save their neighborhood.",
+        "Mouth's improvisation: Pure childhood chaos.",
+        "Truffle shuffle: The most uncomfortable dance ever filmed."
+      ]
+    },
+    {
+      "name": "Porky's",
+      "hints": [
+        "High school boys try to lose their virginity at a strip club.",
+        "1981 teen sex comedy that influenced an entire genre.",
+        "Shower scene: The most iconic misogynistic moment."
+      ]
+    },
+    {
+      "name": "Fast Times at Ridgemont High",
+      "hints": [
+        "Interconnected teenage lives at Southern California high school.",
+        "Judge Reinhold's bathroom scene: Pure awkwardness.",
+        "Boogers and Spicoli: Characters that defined an era."
+      ]
+    },
+    {
+      "name": "The Weird Science",
+      "hints": [
+        "Two nerds use computer to create perfect woman.",
+        "Kelly LeBrock in 1985: Every teenage boy's fantasy.",
+        "Computer magic: When 8-bit meets sensuality."
+      ]
+    },
+    {
+      "name": "Revenge of the Nerds",
+      "hints": [
+        "Nerds start their own fraternity and seduce sorority girls.",
+        "Robert Carradine's nerd activism: Surprisingly heartfelt.",
+        "Pocket protectors become symbols of resistance."
+      ]
+    },
+    {
+      "name": "The Karate Kid",
+      "hints": [
+        "Wax-on, wax-off: Secret to karate mastery.",
+        "Ralph Macchio's high kick launches thousand movie franchises.",
+        "Mr. Miyagi: Wise old man solves everything through chores."
+      ]
+    },
+    {
+      "name": "Rocky",
+      "hints": [
+        "Philadelphia bum fights heavyweight champion and doesn't die.",
+        "Stallone's speech impediment becomes iconic.",
+        "Eye of the Tiger... in the sequels, anyway."
+      ]
+    },
+    {
+      "name": "Rocky IV",
+      "hints": [
+        "Rocky fights Russian robot during Cold War.",
+        "Stallone's muscles vs. Soviet technology: Cold War absurdity.",
+        "Training montage in Siberia somehow works."
+      ]
+    },
+    {
+      "name": "Commando",
+      "hints": [
+        "Arnold Schwarzenegger's daughter kidnapped; he kills everyone.",
+        "One-liners masquerading as a plot.",
+        "Steroid physique solves all international incidents."
+      ]
+    },
+    {
+      "name": "Predator",
+      "hints": [
+        "Alien hunts elite military team and Arnold still wins.",
+        "Schwarzenegger vs. extraterrestrial: Improbable but awesome.",
+        "Mud and muscles: The formula for action comedy."
+      ]
+    },
+    {
+      "name": "Total Recall",
+      "hints": [
+        "Man can't tell if memory is real or artificial implant.",
+        "Arnold Schwarzenegger in futuristic Mars: Confused genius.",
+        "The twist nobody saw coming until the very obvious ending."
+      ]
+    },
+    {
+      "name": "Kindergarten Cop",
+      "hints": [
+        "Arnold Schwarzenegger teaches kindergarten for undercover reasons.",
+        "Action hero destroyed by tiny children's chaos.",
+        "It's not a tumor: Best comedic denial ever."
+      ]
+    },
+    {
+      "name": "Twins",
+      "hints": [
+        "Arnold and Danny DeVito are genetically engineered twins.",
+        "Genetic engineering creates height disparity and comedy.",
+        "Unlikely buddy cop movie before buddy cop was cool."
+      ]
+    },
+    {
+      "name": "The Running Man",
+      "hints": [
+        "Dystopian future where criminals are hunted for entertainment.",
+        "Arnold Schwarzenegger in yellow spandex: Peak 90s action.",
+        "Game show death match: Reality TV gone wrong."
+      ]
+    },
+    {
+      "name": "True Lies",
+      "hints": [
+        "Spy lies to wife about job, gets caught, destroys things together.",
+        "Arnold and Schwarzenegger's comedy chemistry: Surprisingly good.",
+        "Harrier jet chase through Miami: Spectacularly absurd."
+      ]
+    },
+    {
+      "name": "The Expendables",
+      "hints": [
+        "Every action movie star ever in one ridiculous movie.",
+        "Nostalgia for steroid physiques and one-liners.",
+        "Plot: Irrelevant. Muscles: Mandatory."
+      ]
+    },
+    {
+      "name": "The Hangover Part II",
+      "hints": [
+        "Same movie happens in Bangkok instead of Las Vegas.",
+        "Recycled plot with new location and monkey.",
+        "Beating a dead horse: Profitable edition."
+      ]
+    },
+    {
+      "name": "The Hangover Part III",
+      "hints": [
+        "Trilogy completes itself without redeeming the sequels.",
+        "Even the actors don't seem to want to be there.",
+        "Franchise decay: The hangover nobody needed."
+      ]
+    },
+    {
+      "name": "Road Trip",
+      "hints": [
+        "College guys drive across country to intercept love letter.",
+        "MTV-generation comedy that aged poorly.",
+        "Breckin Meyer makes questionable life choices."
+      ]
+    },
+    {
+      "name": "Van Wilder",
+      "hints": [
+        "College guy refuses to graduate and becomes campus deity.",
+        "Ryan Reynolds' charm carries mediocre premise.",
+        "Seven years of college: Eternal student goals."
+      ]
+    },
+    {
+      "name": "Old Dogs",
+      "hints": [
+        "Two old guys accidentally acquire kids and learn life lessons.",
+        "John Travolta and Robin Williams past their prime.",
+        "Geriatric comedy: When nobody asked for this."
+      ]
+    },
+    {
+      "name": "Meet the Parents",
+      "hints": [
+        "Boyfriend meets girlfriend's ex-military father and disasters ensue.",
+        "Ben Stiller's awkward charm at maximum cringe.",
+        "Cat fiasco: Everything goes wrong simultaneously."
+      ]
+    },
+    {
+      "name": "Meet the Fockers",
+      "hints": [
+        "Meet the Parents sequel where his parents are worse.",
+        "Robert De Niro as gentle hippie: Comedy gold.",
+        "Awkwardness multiplication in holiday comedy sequel."
+      ]
+    },
+    {
+      "name": "Along Came Polly",
+      "hints": [
+        "Uptight guy befriends free-spirited woman post-divorce.",
+        "Jennifer Aniston's casual charm solves anxiety.",
+        "Salsa dancing and diarrhea: Unexpected comedy combo."
+      ]
+    },
+    {
+      "name": "You, Me and Dupree",
+      "hints": [
+        "Friend becomes third wheel on honeymoon and lives with couple.",
+        "Owen Wilson as manchild destroying marriage stability.",
+        "Bromance threat to new marriage: Uncomfortably realistic."
+      ]
+    },
+    {
+      "name": "40 Days and 40 Nights",
+      "hints": [
+        "Guy challenges himself to celibacy for lent while falling in love.",
+        "Josh Hartnett sexualized in ways the film doesn't understand.",
+        "Religious comedy nobody knew they didn't want."
+      ]
+    },
+    {
+      "name": "Forgetting Sarah Marshall",
+      "hints": [
+        "Guy discovers girlfriend cheating on him with rock star.",
+        "Jason Segel's full-frontal nudity: Hilariously unnecessary.",
+        "Hawaiian vacation romance after public humiliation."
+      ]
+    },
+    {
+      "name": "I Love You, Beth Cooper",
+      "hints": [
+        "Nerd confesses love to cheerleader at graduation.",
+        "Hayden Panettiere carries mediocre teen comedy.",
+        "Valedictorian speech confession: Bold and terrible."
+      ]
+    },
+    {
+      "name": "Supergirl",
+      "hints": [
+        "Superman's cousin comes to Earth and bumbles her way to heroism.",
+        "Helen Slater in 1984: Inexplicably charming.",
+        "Superhero film nobody needed or remembered."
+      ]
+    },
+    {
+      "name": "Barb Wire",
+      "hints": [
+        "Baywatch actress as futuristic bounty hunter in leather.",
+        "Pamela Anderson's acting: Surprisingly bad.",
+        "Comic book adaptation nobody asked for."
+      ]
+    },
+    {
+      "name": "Tank Girl",
+      "hints": [
+        "Lori Petty as punk rock comic book heroine.",
+        "Surreal comedy that doesn't know what it wants to be.",
+        "Cult classic for people who love weird nonsense."
+      ]
+    },
+    {
+      "name": "Josie and the Pussycats",
+      "hints": [
+        "Girl band fights mind control while looking fabulous.",
+        "Tara Reid's acting abilities tested and found wanting.",
+        "Product placement masquerading as satire."
+      ]
+    },
+    {
+      "name": "Spice World",
+      "hints": [
+        "Spice Girls on a tour bus solving mysteries.",
+        "Attempt at making rock star vehicle that backfired.",
+        "Cultural artifact from era everyone wants to forget."
+      ]
+    },
+    {
+      "name": "Crossroads",
+      "hints": [
+        "Britney Spears road trip movie scripted by high school students.",
+        "Pop star acting: Barely better than karaoke.",
+        "Road trip formula applied without logic or charm."
+      ]
+    },
+    {
+      "name": "Glitter",
+      "hints": [
+        "Mariah Carey as amnesiac singer finding her voice.",
+        "Mariah Carey's acting: Her biggest flop.",
+        "Movie so bad it became culturally significant."
+      ]
+    },
+    {
+      "name": "Gigli",
+      "hints": [
+        "Mobster and hired killer fall in love and blah.",
+        "Jennifer Lopez and Ben Affleck chemistry: Nonexistent.",
+        "Worst movie of the 2000s: Undeniably correct."
+      ]
+    },
+    {
+      "name": "Bennifer: The Movie",
+      "hints": [
+        "Celebrity couple made movie during relationship peak.",
+        "Their actual incompatibility proven on screen.",
+        "Golden Raspberries: Multiple awards for terribleness."
+      ]
+    },
+    {
+      "name": "From Justin to Kelly",
+      "hints": [
+        "American Idol contestants in beach-themed musical romance.",
+        "Justin Guarini and Kelly Clarkson: Zero chemistry.",
+        "Desperate attempt to capitalize on reality TV."
+      ]
+    },
+    {
+      "name": "Battlefield Earth",
+      "hints": [
+        "Scientology propaganda disguised as sci-fi action.",
+        "John Travolta's dreadlocks define unintentional comedy.",
+        "Movie so awful it transcends normal film criticism."
+      ]
+    },
+    {
+      "name": "The Room",
+      "hints": [
+        "Incomprehensibly bad film that became midnight movie legend.",
+        "Tommy Wiseau's acting: Unforgettably terrible.",
+        "So-bad-it's-good cinema at its most confusing."
+      ]
+    },
+    {
+      "name": "Plan 9 from Outer Space",
+      "hints": [
+        "Ed Wood's low-budget alien invasion film is charmingly inept.",
+        "Flying saucer special effects: Cardboard circles.",
+        "Grandpa Bela Lugosi: Stock footage of nobility."
+      ]
+    },
+    {
+      "name": "Troll 2",
+      "hints": [
+        "Vegetarian trolls attack family in haunted town.",
+        "No connection to original Troll film whatsoever.",
+        "Cult status earned through spectacular incompetence."
+      ]
+    },
+    {
+      "name": "Birdemic: Shock and Terror",
+      "hints": [
+        "Environmental allegory with terrible bird effects.",
+        "So-bad-it's-good cinema reaches new lows.",
+        "The Room of animal attack films."
+      ]
+    },
+    {
+      "name": "The Velocipastor",
+      "hints": [
+        "Priest turns into dinosaur and fights crime.",
+        "Exactly as ridiculous as premise suggests.",
+        "Beautiful stupidity caught on film."
+      ]
+    },
+    {
+      "name": "Rubber",
+      "hints": [
+        "Sentient tire kills people with psychic powers.",
+        "French surrealist horror-comedy about tire.",
+        "Art film that makes no sense: Intentionally."
+      ]
+    },
+    {
+      "name": "Attack of the Killer Donuts",
+      "hints": [
+        "Toxic donuts attack small town with sugary fury.",
+        "B-movie premise executed with zero budget.",
+        "Carbs kill: The movie nobody wanted."
+      ]
+    },
+    {
+      "name": "Llamageddon",
+      "hints": [
+        "Space llama crash-lands and causes chaos.",
+        "Exactly as insane as the title suggests.",
+        "B-movie comedy that knows exactly what it is."
+      ]
+    }
+  ]
+}
