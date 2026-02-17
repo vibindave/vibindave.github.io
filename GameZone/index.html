@@ -1,226 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>🎬 Guess The Movie Spinner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 Fun Friday - Mini Games Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-  body {
-    background: radial-gradient(circle, #1f1c2c, #928dab);
-    font-family: "Segoe UI", sans-serif;
-    text-align: center;
-    color: #fff;
-    padding: 20px;
-  }
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --accent: #ffe66d;
+      --dark: #2d3436;
+      --light: #f8f9fa;
+    }
 
-  .wheel-container {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    margin: 30px auto;
-  }
+    body {
+      font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4ecdc4 75%, #667eea 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      color: #2d3436;
+      overflow-x: hidden;
+    }
 
-  .wheel {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: conic-gradient(
-      #ff9800 0deg 60deg,
-      #4caf50 60deg 120deg,
-      #03a9f4 120deg 180deg,
-      #e91e63 180deg 240deg,
-      #9c27b0 240deg 300deg,
-      #ffc107 300deg 360deg
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
-    transition: transform 4s cubic-bezier(0.17, 0.67, 0.14, 0.99);
-  }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-  .pointer {
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 20px solid #fff;
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
 
-  button {
-    padding: 12px 18px;
-    margin: 8px;
-    border: none;
-    border-radius: 10px;
-    background: #ffeb3b;
-    color: #000;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+    }
 
-  .box {
-    background: rgba(0,0,0,0.35);
-    padding: 22px;
-    border-radius: 16px;
-    max-width: 720px;
-    margin: auto;
-  }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-  .narration, .twister {
-    margin-top: 15px;
-    font-size: 18px;
-    min-height: 60px;
-  }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      font-weight: 500;
+    }
 
-  .reveal {
-    font-size: 24px;
-    margin-top: 10px;
-    color: #00e676;
-    font-weight: bold;
-  }
-</style>
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    /* Game Card */
+    .game-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .game-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #ffe66d);
+      z-index: 1;
+    }
+
+    /* Card Header with Emoji */
+    .card-header {
+      padding: 30px 25px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .card-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      display: block;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(10deg) scale(1.1); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-header .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Card Body */
+    .card-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    /* CTA Button */
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e72 100%);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+      background: linear-gradient(135deg, #ff8e72 0%, #ff6b6b 100%);
+    }
+
+    /* Different button colors for variety */
+    .cta-btn-secondary {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44b3aa 100%);
+      box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+    }
+
+    .cta-btn-secondary:hover {
+      background: linear-gradient(135deg, #44b3aa 0%, #4ecdc4 100%);
+      box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+    }
+
+    .cta-btn-tertiary {
+      background: linear-gradient(135deg, #ffe66d 0%, #ffd93d 100%);
+      color: #2d3436;
+      box-shadow: 0 5px 15px rgba(255, 230, 109, 0.3);
+    }
+
+    .cta-btn-tertiary:hover {
+      background: linear-gradient(135deg, #ffd93d 0%, #ffe66d 100%);
+      box-shadow: 0 8px 25px rgba(255, 230, 109, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.1);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      backdrop-filter: blur(10px);
+    }
+
+    footer p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .footer-emojis {
+      font-size: 2rem;
+      letter-spacing: 10px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card-emoji {
+        font-size: 2.5rem;
+      }
+
+      .card-header h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Decorative confetti effect */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Stats section */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      color: white;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+  </style>
 </head>
-
 <body>
 
-<h1>🎯 Guess The Movie</h1>
-<p>Spin it. Laugh. Guess it. Reveal it.</p>
+  <!-- Header -->
+  <header>
+    <h1>🎉 Fun Friday</h1>
+    <p>Your Ultimate Mini Games Hub! 🎮✨</p>
+  </header>
 
-<div class="wheel-container">
-  <div class="pointer"></div>
-  <div class="wheel" id="wheel">SPIN</div>
-</div>
+  <div class="container">
+    <!-- Stats Section -->
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <div class="stat-label">Epic Games</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">∞</span>
+        <div class="stat-label">Fun Times</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">🚀</span>
+        <div class="stat-label">Ready to Play</div>
+      </div>
+    </div>
 
-<div class="box">
-  <button onclick="spin()">🎡 Spin</button>
-  <button onclick="reveal()">👀 Reveal Movie</button>
-  <button onclick="pickTwister()">👅 Tongue Twister</button>
+    <!-- Games Grid -->
+    <div class="games-grid">
+      <!-- Game 1: Haha Wheel -->
+      <div class="game-card">
+        <div class="card-header">
+          <span class="card-emoji">🎬</span>
+          <h2>Haha Wheel</h2>
+          <span class="tag">🎯 SPINNER</span>
+        </div>
+        <div class="card-body">
+          <p>Spin the colorful wheel and test your movie knowledge! Get a hilarious narration and guess the movie before revealing the answer. Perfect for movie buffs and party fun!</p>
+          <a href="HahaWheel.html" class="cta-btn">🎡 Let's Spin!</a>
+        </div>
+      </div>
 
-  <div class="narration" id="narration"></div>
-  <div class="reveal" id="reveal"></div>
-  <div class="twister" id="twister"></div>
-</div>
+      <!-- Game 2: Jumbled Words -->
+      <div class="game-card">
+        <div class="card-header">
+          <span class="card-emoji">🧩</span>
+          <h2>Jumbled Words</h2>
+          <span class="tag">🧠 PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <p>Unscramble the jumbled letters and guess the movie or celebrity! Get hints, reveal answers, and challenge yourself with movies and famous personalities from around the world.</p>
+          <a href="Jumbled.html" class="cta-btn cta-btn-secondary">🔤 Unscramble!</a>
+        </div>
+      </div>
 
-<script>
-/* ================= DATA ================= */
+      <!-- Game 3: More Games Coming -->
+      <div class="game-card">
+        <div class="card-header">
+          <span class="card-emoji">🎪</span>
+          <h2>Coming Soon!</h2>
+          <span class="tag">🌟 MYSTERY</span>
+        </div>
+        <div class="card-body">
+          <p>We're cooking up more exciting games for you! Stay tuned for thrilling new challenges, mind-bending puzzles, and unforgettable fun experiences. Check back soon!</p>
+          <button class="cta-btn cta-btn-tertiary" onclick="showAlert()">⏳ Stay Tuned!</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-const movies = [
-  { name: "Inception", narration: "People sleep, dream, sleep again, and still feel tired." },
-  { name: "Titanic", narration: "Love story where safety rules take a holiday." },
-  { name: "Interstellar", narration: "Dad travels space to win worst time-management award." },
-  { name: "The Matrix", narration: "Office burnout cured by pills and flying kicks." },
-  { name: "Avengers: Endgame", narration: "Adults undo mistakes using time travel and hope." },
-  { name: "Jaws", narration: "Shark with personal issues vs beach economy." },
-  { name: "Jurassic Park", narration: "Dinosaurs prove why manuals exist." },
-  { name: "Forrest Gump", narration: "Man jogs through history accidentally." },
-  { name: "The Dark Knight", narration: "Serious man debates ethics with a clown." },
-  { name: "Gladiator", narration: "Office politics, ancient edition." },
+  <!-- Footer -->
+  <footer>
+    <p>Made with 💖 for Maximum Fun & Entertainment</p>
+    <div class="footer-emojis">🎮 🎨 🎭 🎪 🎯</div>
+    <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.8;">© 2026 Fun Friday Games • All games available offline</p>
+  </footer>
 
-  { name: "Avatar", narration: "Blue people defend their forest aggressively." },
-  { name: "The Lion King", narration: "Family drama with singing wildlife." },
-  { name: "Harry Potter", narration: "School where exams are least dangerous thing." },
-  { name: "Frozen", narration: "Emotional issues cause weather problems." },
-  { name: "Sholay", narration: "Village outsources crime control." },
-  { name: "Bahubali", narration: "Long backstory before simple answer." },
-  { name: "3 Idiots", narration: "Friends survive education system together." },
-  { name: "KGF", narration: "Man whispers, world listens." },
-  { name: "Pushpa", narration: "Confidence does the heavy lifting." },
-  { name: "RRR", narration: "Friendship casually defeats empire." },
+  <script>
+    // Create confetti on page load
+    function createConfetti() {
+      for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.textContent = ['🎉', '🎊', '🎈', '⭐', '🌟', '✨', '🎯', '🎮'][Math.floor(Math.random() * 8)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.fontSize = Math.random() * 20 + 15 + 'px';
+        confetti.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+        document.body.appendChild(confetti);
 
-  { name: "Toy Story", narration: "Toys fear replacement like employees." },
-  { name: "Up", narration: "Retirement plan involves balloons." },
-  { name: "Finding Nemo", narration: "Dad ignores maps repeatedly." },
-  { name: "Pirates of the Caribbean", narration: "Drunk captain succeeds anyway." },
-  { name: "Iron Man", narration: "Rich guy solves problems with upgrades." },
-  { name: "Doctor Strange", narration: "Surgeon switches career via magic." },
-  { name: "Spider-Man", narration: "Teen balances homework and hero work." },
-  { name: "Kung Fu Panda", narration: "Snack-loving panda becomes legend." },
-  { name: "Rocky", narration: "Man runs upstairs, never stops." },
-  { name: "The Social Network", narration: "Friendship ends over a website." }
-];
+        setTimeout(() => confetti.remove(), 4000);
+      }
+    }
 
-const tongueTwisters = [
-  "She sells seashells by the seashore",
-  "Red lorry yellow lorry",
-  "Peter Piper picked a peck of pickled peppers",
-  "Betty bought butter but the butter was bitter",
-  "Unique New York",
-  "Toy boat toy boat toy boat",
-  "Irish wristwatch",
-  "Rubber baby buggy bumpers",
-  "Greek grapes Greek grapes",
-  "Six slippery snails slid slowly seaward",
-  "Fuzzy Wuzzy was a bear",
-  "Fresh fried fish",
-  "Black bug bled black blood",
-  "Eleven benevolent elephants",
-  "Thin sticks thick bricks",
-  "She sees cheese",
-  "Near an ear a nearer ear",
-  "Busy buzzing bumblebees",
-  "Tom threw Tim three thumbtacks",
-  "Good blood bad blood",
-  "Truly rural",
-  "He threw three free throws",
-  "Four furious friends fought for food",
-  "Crisp crusts crackle crunchily",
-  "Scissors sizzle thistles sizzle",
-  "How much wood would a woodchuck chuck",
-  "Six sleek swans swam swiftly southward",
-  "Can you can a can as a canner can",
-  "Lesser leather never weathered wetter weather",
-  "I scream you scream we all scream for ice cream"
-];
+    // Create confetti on scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200 && Math.random() > 0.95) {
+        createConfetti();
+      }
+    });
 
-/* ================= NO REPEAT LOGIC ================= */
+    // Show alert for coming soon
+    function showAlert() {
+      alert('🚀 More epic games are on the way!\n\nStay excited and keep checking back for amazing new challenges!');
+    }
 
-let unusedMovies = [...movies];
-let unusedTwisters = [...tongueTwisters];
-let angle = 0;
-let currentMovie = null;
+    // Add some confetti on page load
+    window.addEventListener('load', () => {
+      createConfetti();
+      setTimeout(() => createConfetti(), 1000);
+    });
 
-function getRandomItem(arr) {
-  const index = Math.floor(Math.random() * arr.length);
-  return arr.splice(index, 1)[0];
-}
-
-function spin() {
-  if (unusedMovies.length === 0) {
-    unusedMovies = [...movies]; // reset when exhausted
-  }
-
-  angle += (Math.floor(Math.random() * 5) + 5) * 360;
-  document.getElementById("wheel").style.transform = `rotate(${angle}deg)`;
-
-  currentMovie = getRandomItem(unusedMovies);
-
-  document.getElementById("narration").innerText =
-    "🎤 Narration:\n" + currentMovie.narration;
-  document.getElementById("reveal").innerText = "";
-}
-
-function reveal() {
-  if (!currentMovie) return;
-  document.getElementById("reveal").innerText =
-    "🎬 Movie: " + currentMovie.name;
-}
-
-function pickTwister() {
-  if (unusedTwisters.length === 0) {
-    unusedTwisters = [...tongueTwisters]; // reset when exhausted
-  }
-
-  const twister = getRandomItem(unusedTwisters);
-  document.getElementById("twister").innerText =
-    "👅 Tongue Twister:\n" + twister;
-}
-</script>
+    // Smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
